@@ -3,7 +3,13 @@
 "-------------------------------------------------------------------------------
 set nocompatible " or   set nocp
 
-source $VIMRUNTIME/vimrc_example.vim
+" Always display English interface
+set langmenu=en_US
+let $LANG = 'en_US.UTF-8'
+set encoding=utf-8
+
+
+"source $VIMRUNTIME/vimrc_example.vim
 "-------------------------------------------------------------------------------
 " Enable file type detection. Use the default filetype settings.
 " Also load indent files, to automatically do language-dependent indenting.
@@ -26,7 +32,7 @@ set history=50                  " keep 50 lines of command line history
 set hlsearch                    " highlight the last used search pattern
 set incsearch                   " do incremental searching
 set listchars=tab:\|\ ,trail:-
-set list
+set nolist
 set modelines=0
 "set colorcolumn=85
 set ttyfast
@@ -59,30 +65,30 @@ set laststatus=2                " show the status bar, show the current file nam
 set smartcase
 set updatetime=100
 set cursorline
-
 set guioptions-=T       " Dont use the toolbar in GVIM
 set guioptions-=m       " Do not use the menu bar
 set guioptions-=L       " Hide left side scrollbar
 " set guioptions -=r      " Hide right side scrollbar
-set guifont=Source_Code_Pro_Semibold:h10:cANSI
+"set guifont=Source_Code_Pro_Semibold:h10:cANSI
+set guifont=Source_Code_Pro:h10:cANSI
 
 set cinoptions=t0(0,W4c0g0N-s
 
 "set spell
 
 " ======================================================
-let g:rehash256 = 1
-let g:molokai_original = 1
 colorscheme molokai
 " =========================================================
 " remove all trailing space when saving file
 "autocmd BufWritePre * :%s/\s\+$//e
-" update the file contrent when file is changed outside
-autocmd CursorHold * checktime
 
+" update the file content when file is changed outside
+autocmd CursorHold * checktime
+autocmd FocusGained * redraw!
 " =========================  NERDTree ====================================
 " let NERDTreeDirArrows = 0
 let NERDTreeWinPos = "right"
+let NERDTreeHijackNetrw = 0
 nmap <silent> <F9> :NERDTreeToggle<CR>
 " =================   Vundle   ====================
 
@@ -96,23 +102,24 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'FelikZ/ctrlp-py-matcher'
+"Plugin 'jlebar/ctrlp-py-matcher'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'embear/vim-localvimrc'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
-
 Plugin 'rking/ag.vim'
-
 Plugin 'easymotion/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'vim-scripts/mru.vim'
+Plugin 'will133/vim-dirdiff'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -135,10 +142,13 @@ let g:airline#extensions#hunks#enabled  = 0
 
 let g:airline_powerline_fonts = 1
 
+" ================== ag.vim =========================
+let g:ag_highlight=1
+
 " ==================  ctrlp  =============================
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|a|dll)$',
+  \ 'file': '\v\.(exe|so|a|dll)$|GTAGS$|GRTAGS$|GPATH$',
   \ }
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -146,26 +156,28 @@ let g:ctrlp_by_filename = 1
 "let g:ctrlp_regexp = 1
 let g:ctrlp_max_files = 0
 
-" ctrlp match func
-"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+" PyMatcher for CtrlP
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " ------------ use ag to speed up ctrlp ------------
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-  " Use Ag over Grep
-  " Note we extract the column as well as the file and line number
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-  set grepformat=%f:%l:%c%m
+    " Use Ag over Grep
+    " Note we extract the column as well as the file and line number
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 " =============== tagbar ===============
 "
 let g:tagbar_left = 1
 nmap <silent> <F7> :TagbarToggle<CR>
+
+" =================== vim-multiple-cursors =======================
+let g:multi_cursor_next_key='<C-s>'
 
 " =================== a.vim =========================
 let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:../export'
@@ -221,7 +233,7 @@ nmap t <Plug>(easymotion-t2)
 " no blink screen and bell
 set noerrorbells visualbell t_vb=
 if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
 endif
 
 set t_ut=
