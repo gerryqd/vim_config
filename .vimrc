@@ -65,6 +65,7 @@ set laststatus=2                " show the status bar, show the current file nam
 set smartcase
 set updatetime=100
 set cursorline
+set fillchars=vert:\│   " it is a unicode char.
 set guioptions-=T       " Dont use the toolbar in GVIM
 set guioptions-=m       " Do not use the menu bar
 set guioptions-=L       " Hide left side scrollbar
@@ -76,8 +77,6 @@ set cinoptions=t0(0,W4c0g0N-s
 
 "set spell
 
-" ======================================================
-colorscheme molokai
 " =========================================================
 " remove all trailing space when saving file
 "autocmd BufWritePre * :%s/\s\+$//e
@@ -120,6 +119,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vim-scripts/mru.vim'
 Plugin 'will133/vim-dirdiff'
+Plugin 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -135,6 +135,10 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+
+" ======================================================
+colorscheme molokai
 
 " ================== vim airline =========================
 let g:airline#extensions#branch#enabled = 1
