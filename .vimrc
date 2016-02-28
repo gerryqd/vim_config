@@ -35,7 +35,17 @@ set listchars=tab:\|\ ,trail:-
 set nolist
 set modelines=0
 "set colorcolumn=85
+
+" Ignore search case except that it start with a capitialize char
+set ignorecase
+set smartcase
+
+set noshowmode
+
+" Improve vim's scrolling speed
 set ttyfast
+set ttyscroll=3
+"set lazyredraw
 
 set mouse=a                     " enable the use of the mouse
 if !has("gui_running")
@@ -46,7 +56,6 @@ set nowrap                      " do not wrap lines
 set noundofile
 set nobackup
 set noswapfile
-set popt=left:8pc,right:3pc     " print options
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
 set shiftwidth=4                " number of spaces to use for each step of indent
@@ -70,7 +79,6 @@ set guioptions-=T       " Dont use the toolbar in GVIM
 set guioptions-=m       " Do not use the menu bar
 set guioptions-=L       " Hide left side scrollbar
 " set guioptions -=r      " Hide right side scrollbar
-"set guifont=Source_Code_Pro_Semibold:h10:cANSI
 set guifont=Source_Code_Pro:h10:cANSI
 
 set cinoptions=t0(0,W4c0g0N-s
@@ -89,6 +97,7 @@ autocmd FocusGained * redraw!
 let NERDTreeWinPos = "right"
 let NERDTreeHijackNetrw = 0
 nmap <silent> <F9> :NERDTreeToggle<CR>
+
 " =================   Vundle   ====================
 
 set nocompatible              " be iMproved, required
@@ -103,23 +112,27 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
-"Plugin 'jlebar/ctrlp-py-matcher'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-scripts/a.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'embear/vim-localvimrc'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'rking/ag.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'embear/vim-localvimrc'
+Plugin 'ervandew/supertab'
+Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tomasr/molokai'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/mru.vim'
 Plugin 'will133/vim-dirdiff'
-Plugin 'tomasr/molokai'
+"Plugin 'Rip-Rip/clang_complete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -135,9 +148,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
-
 " ======================================================
+
+" This should be placed after the Plugin
 colorscheme molokai
 
 " ================== vim airline =========================
@@ -145,6 +158,10 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled  = 0
 
 let g:airline_powerline_fonts = 1
+let g:airline_theme='molokai'
+
+" ================== ack.vim =========================
+let g:ackhighlight = 1
 
 " ================== ag.vim =========================
 let g:ag_highlight=1
@@ -152,15 +169,18 @@ let g:ag_highlight=1
 " ==================  ctrlp  =============================
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|a|dll)$|GTAGS$|GRTAGS$|GPATH$',
+  \ 'file': '\v\.(exe|so|a|dll)$',
   \ }
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_by_filename = 1
 "let g:ctrlp_regexp = 1
 let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 40
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 
-" PyMatcher for CtrlP
+" ctrlp match func
+"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " ------------ use ag to speed up ctrlp ------------
@@ -194,10 +214,11 @@ if has("cscope")
     " set to 1 if you want the reverse search order.
     set csto=1
 
+    set nocscopeverbose
     " add any cscope database in current directory
     if filereadable("GTAGS")
         cs add GTAGS
-    " else add the database pointed to by environment variable
+        " else add the database pointed to by environment variable
     elseif $CSCOPE_DB !=""
         cs add $CSCOPE_DB
     endif
@@ -243,4 +264,13 @@ endif
 set t_ut=
 
 " ============================================================
+" This will not display scratch window in jedi-vim
+" autocmd FileType python setlocal completeopt-=preview
 
+" ===========================================================
+au FileType ruby set softtabstop=2 tabstop=2 shiftwidth=2
+
+" ============================================================
+" a.vim
+"
+let g:alternateSearchPath = 'sfr:../source,sfr:../header,sfr:../export,sfr:../src,sfr:../include,sfr:../inc'
