@@ -98,56 +98,29 @@ let NERDTreeWinPos = "right"
 let NERDTreeHijackNetrw = 0
 nmap <silent> <F9> :NERDTreeToggle<CR>
 
-" =================   Vundle   ====================
+" =================   vim-plug   ====================
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin()
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'embear/vim-localvimrc'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tomasr/molokai'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/vcscommand.vim'
+Plug 'will133/vim-dirdiff'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#end()
 
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'embear/vim-localvimrc'
-Plugin 'ervandew/supertab'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tomasr/molokai'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/mru.vim'
-Plugin 'will133/vim-dirdiff'
-"Plugin 'Rip-Rip/clang_complete'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 " ======================================================
 
 " This should be placed after the Plugin
@@ -265,7 +238,7 @@ set t_ut=
 
 " ============================================================
 " This will not display scratch window in jedi-vim
-" autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python setlocal completeopt-=preview
 
 " ===========================================================
 au FileType ruby set softtabstop=2 tabstop=2 shiftwidth=2
@@ -274,3 +247,6 @@ au FileType ruby set softtabstop=2 tabstop=2 shiftwidth=2
 " a.vim
 "
 let g:alternateSearchPath = 'sfr:../source,sfr:../header,sfr:../export,sfr:../src,sfr:../include,sfr:../inc'
+
+
+let g:DirDiffDynamicDiffText = 0
