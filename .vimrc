@@ -79,7 +79,7 @@ set guioptions-=T       " Dont use the toolbar in GVIM
 set guioptions-=m       " Do not use the menu bar
 set guioptions-=L       " Hide left side scrollbar
 " set guioptions -=r      " Hide right side scrollbar
-set guifont=Source_Code_Pro:h10:cANSI
+set guifont=Source_Code_Pro_Semibold:h10:cANSI
 
 set cinoptions=t0(0,W4c0g0N-s
 
@@ -107,6 +107,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'embear/vim-localvimrc'
 Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -132,9 +133,6 @@ let g:airline#extensions#hunks#enabled  = 0
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='molokai'
-
-" ================== ack.vim =========================
-let g:ackhighlight = 1
 
 " ================== ag.vim =========================
 let g:ag_highlight=1
