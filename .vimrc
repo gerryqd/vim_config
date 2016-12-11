@@ -92,12 +92,6 @@ set cinoptions=t0(0,W4c0g0N-s
 " update the file content when file is changed outside
 autocmd CursorHold * checktime
 autocmd FocusGained * redraw!
-" =========================  NERDTree ====================================
-" let NERDTreeDirArrows = 0
-let NERDTreeWinPos = "right"
-let NERDTreeHijackNetrw = 0
-nmap <silent> <F9> :NERDTreeToggle<CR>
-
 " =================   vim-plug   ====================
 
 call plug#begin()
@@ -113,26 +107,19 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomasr/molokai'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/vcscommand.vim'
-Plug 'will133/vim-dirdiff'
 
 call plug#end()
 
 " ======================================================
-
 " This should be placed after the Plugin
 colorscheme molokai
 
-" ================== vim airline =========================
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#hunks#enabled  = 0
-
-let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
+" =========================  NERDTree ====================================
+let NERDTreeWinPos = "right"
+let NERDTreeHijackNetrw = 0
+nmap <silent> <F9> :NERDTreeToggle<CR>
 
 " ================== ag.vim =========================
 let g:ag_highlight=1
@@ -175,7 +162,7 @@ nmap <silent> <F7> :TagbarToggle<CR>
 let g:multi_cursor_next_key='<C-s>'
 
 " =================== a.vim =========================
-let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:../export'
+let g:alternateSearchPath = 'sfr:../source,sfr:../header,sfr:../export,sfr:../src,sfr:../include,sfr:../inc'
 
 " ========================== CSCOPE  =============================
 set csprg=gtags-cscope
@@ -211,8 +198,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 nmap <F5> :cp<CR>
 nmap <F6> :cn<CR>
 
-" =============================================================
-" Supertab
+" =============  Supertab  ===========================
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " =========  local vimrc =========
@@ -232,19 +218,8 @@ if has('autocmd')
     autocmd GUIEnter * set visualbell t_vb=
 endif
 
+" =========================================
+" This is added for vim colorscheme issue in tmux
+" disable Background Color Erase (BCE) by clearing the t_ut terminal option
 set t_ut=
 
-" ============================================================
-" This will not display scratch window in jedi-vim
-autocmd FileType python setlocal completeopt-=preview
-
-" ===========================================================
-au FileType ruby set softtabstop=2 tabstop=2 shiftwidth=2
-
-" ============================================================
-" a.vim
-"
-let g:alternateSearchPath = 'sfr:../source,sfr:../header,sfr:../export,sfr:../src,sfr:../include,sfr:../inc'
-
-
-let g:DirDiffDynamicDiffText = 0
