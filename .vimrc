@@ -8,8 +8,6 @@ set langmenu=en_US
 let $LANG = 'en_US.UTF-8'
 set encoding=utf-8
 
-
-"source $VIMRUNTIME/vimrc_example.vim
 "-------------------------------------------------------------------------------
 " Enable file type detection. Use the default filetype settings.
 " Also load indent files, to automatically do language-dependent indenting.
@@ -78,7 +76,6 @@ set fillchars=vert:\│   " it is a unicode char.
 set guioptions-=T       " Dont use the toolbar in GVIM
 set guioptions-=m       " Do not use the menu bar
 set guioptions-=L       " Hide left side scrollbar
-" set guioptions -=r      " Hide right side scrollbar
 set guifont=Source_Code_Pro_Semibold:h10:cANSI
 
 set cinoptions=t0(0,W4c0g0N-s
@@ -92,6 +89,7 @@ set cinoptions=t0(0,W4c0g0N-s
 " update the file content when file is changed outside
 autocmd CursorHold * checktime
 autocmd FocusGained * redraw!
+
 " =================   vim-plug   ====================
 
 call plug#begin()
@@ -107,6 +105,7 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/vcscommand.vim'
 
@@ -114,7 +113,11 @@ call plug#end()
 
 " ======================================================
 " This should be placed after the Plugin
-colorscheme molokai
+"colorscheme molokai
+let g:solarized_termcolors=256
+syntax enable
+set background=light
+colorscheme solarized
 
 " =========================  NERDTree ====================================
 let NERDTreeWinPos = "right"
@@ -127,7 +130,7 @@ let g:ag_highlight=1
 " ==================  ctrlp  =============================
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|a|dll)$',
+  \ 'file': '\v\.(exe|so|a|dll|o)$',
   \ }
 
 let g:ctrlp_working_path_mode = 'ra'
