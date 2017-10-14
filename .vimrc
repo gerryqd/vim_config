@@ -113,16 +113,13 @@ call plug#end()
 
 " ======================================================
 " This should be placed after the Plugin
-"colorscheme molokai
-let g:solarized_termcolors=256
-syntax enable
-set background=light
-colorscheme solarized
+colorscheme molokai
 
 " =========================  NERDTree ====================================
 let NERDTreeWinPos = "right"
 let NERDTreeHijackNetrw = 0
 nmap <silent> <F9> :NERDTreeToggle<CR>
+nmap <leader>r :NERDTreeFind<cr>
 
 " ================== ag.vim =========================
 let g:ag_highlight=1
