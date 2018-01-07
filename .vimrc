@@ -102,6 +102,7 @@ Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'rking/ag.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomasr/molokai'
@@ -123,6 +124,9 @@ nmap <leader>r :NERDTreeFind<cr>
 
 " ================== ag.vim =========================
 let g:ag_highlight=1
+
+" =================== vim-ripgrep ==================
+let g:rg_highlight=1
 
 " ==================  ctrlp  =============================
 let g:ctrlp_custom_ignore = {
