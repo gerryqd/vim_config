@@ -208,6 +208,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " =========  local vimrc =========
 " default local vimrc file is .lvimrc
 let g:localvimrc_persistent = 2
+let g:localvimrc_ask = 0
 
 " ===================================================
 " easymotion
