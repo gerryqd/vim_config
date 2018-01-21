@@ -29,10 +29,9 @@ set complete+=k                 " scan the files given with the 'dictionary' opt
 set history=50                  " keep 50 lines of command line history
 set hlsearch                    " highlight the last used search pattern
 set incsearch                   " do incremental searching
-set listchars=tab:\|\ ,trail:-
+set listchars=tab:\>\ ,trail:-
 set nolist
 set modelines=0
-"set colorcolumn=85
 
 " Ignore search case except that it start with a capitialize char
 set ignorecase
@@ -91,7 +90,6 @@ autocmd CursorHold * checktime
 autocmd FocusGained * redraw!
 
 " =================   vim-plug   ====================
-
 call plug#begin()
 
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -106,7 +104,6 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/vcscommand.vim'
 
@@ -142,7 +139,6 @@ let g:ctrlp_max_depth = 40
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 
 " ctrlp match func
-"let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " ------------ use ag to speed up ctrlp ------------
@@ -158,7 +154,6 @@ if executable('ag')
 endif
 
 " =============== tagbar ===============
-"
 let g:tagbar_left = 1
 nmap <silent> <F7> :TagbarToggle<CR>
 
@@ -212,7 +207,6 @@ let g:localvimrc_ask = 0
 
 " ===================================================
 " easymotion
-
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 
